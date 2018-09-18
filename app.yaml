@@ -7,11 +7,11 @@ handlers:
   script: api.google_cloud_endpoints.services_api.api
 
 - url: /.*
-  script: main2.app
+  script: frontend.home.app
 
 libraries:
 - name: webapp2
-  version: "2.5.2"
+  version: 2.5.2
 - name: pycrypto
   version: "latest"
 - name: ssl
@@ -19,4 +19,4 @@ libraries:
 
 env_variables:
   ENDPOINTS_SERVICE_NAME: simple-analytics-ws.appspot.com
-  ENDPOINTS_SERVICE_VERSION: 2018-09-15r4
+  ENDPOINTS_SERVICE_VERSION: 2018-09-17r0

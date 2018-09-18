@@ -4,7 +4,45 @@
     "application/json"
   ],
   "definitions": {
-    "ApiGoogleCloudEndpointsServicesApiEchoResponse": {
+    "ApiGoogleCloudEndpointsContainerAnalyticsServiceAddEventRequest": {
+      "properties": {
+        "content_id": {
+          "type": "string"
+        },
+        "time": {
+          "format": "double",
+          "type": "number"
+        },
+        "user_info": {
+          "$ref": "#/definitions/ApiGoogleCloudEndpointsContainerAnalyticsServiceUserInfo",
+          "description": "\"User information of request object for addEvent API method"
+        }
+      },
+      "type": "object"
+    },
+    "ApiGoogleCloudEndpointsContainerAnalyticsServiceAddEventResponse": {
+      "properties": {
+        "content": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ApiGoogleCloudEndpointsContainerAnalyticsServiceUserInfo": {
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ApiGoogleCloudEndpointsContainerSlowServiceGetContentNameResponse": {
       "properties": {
         "content": {
           "type": "string"
@@ -15,13 +53,42 @@
   },
   "host": "simple-analytics-ws.appspot.com",
   "info": {
+    "description": "Services API deployed with Google Cloud Endpoints.",
     "title": "service",
     "version": "v1"
   },
   "paths": {
+    "/service/v1/analyticsservice/{customerId}/event": {
+      "post": {
+        "operationId": "ServicesApi_analyticsServiceAddEvent",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ApiGoogleCloudEndpointsContainerAnalyticsServiceAddEventRequest"
+            }
+          },
+          {
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ApiGoogleCloudEndpointsContainerAnalyticsServiceAddEventResponse"
+            }
+          }
+        }
+      }
+    },
     "/service/v1/slowservice/content/{contentId}/detail": {
       "get": {
-        "operationId": "ServicesApi_echo",
+        "operationId": "ServicesApi_slowServiceGetContentName",
         "parameters": [
           {
             "in": "path",
@@ -34,7 +101,7 @@
           "200": {
             "description": "A successful response",
             "schema": {
-              "$ref": "#/definitions/ApiGoogleCloudEndpointsServicesApiEchoResponse"
+              "$ref": "#/definitions/ApiGoogleCloudEndpointsContainerSlowServiceGetContentNameResponse"
             }
           }
         }
